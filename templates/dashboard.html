@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="dashboard-header">
+    <div>
+        <h2>Your Items</h2>
+        <p>Create, edit, and delete your records stored in MySQL.</p>
+    </div>
+    <a class="button-link" href="{{ url_for('create_item') }}">Add New Item</a>
+</section>
+
+{% if items %}
+    <div class="item-grid">
+        {% for item in items %}
+            <article class="item-card">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.description or "No description provided." }}</p>
+                <div class="item-meta">
+                    <span>Created: {{ item.created_at.strftime('%d %b %Y %I:%M %p') }}</span>
+                    <span>Updated: {{ item.updated_at.strftime('%d %b %Y %I:%M %p') }}</span>
+                </div>
+                <div class="item-actions">
+                    <a class="button-secondary" href="{{ url_for('edit_item', item_id=item.id) }}">Edit</a>
+                    <form method="post" action="{{ url_for('delete_item', item_id=item.id) }}">
+                        <button class="button-danger" type="submit" onclick="return confirm('Delete this item?');">Delete</button>
+                    </form>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="empty-state">
+        <h3>No items yet</h3>
+        <p>Add your first record to start using the CRUD workflow.</p>
+    </div>
+{% endif %}
+{% endblock %}

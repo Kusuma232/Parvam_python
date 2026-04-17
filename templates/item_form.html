@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="auth-panel">
+    <h2>{{ action }} Item</h2>
+    <p>Fill in the details below and save them to the database.</p>
+
+    <form method="post" class="form-grid">
+        <label for="title">Title</label>
+        <input
+            type="text"
+            id="title"
+            name="title"
+            value="{{ item.title if item else '' }}"
+            placeholder="Enter a title"
+            required
+        >
+
+        <label for="description">Description</label>
+        <textarea
+            id="description"
+            name="description"
+            rows="5"
+            placeholder="Enter a description"
+        >{{ item.description if item else '' }}</textarea>
+
+        <div class="form-actions">
+            <button type="submit">{{ action }} Item</button>
+            <a class="button-secondary" href="{{ url_for('dashboard') }}">Cancel</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

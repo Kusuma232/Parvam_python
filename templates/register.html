@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="auth-panel">
+    <h2>Create Account</h2>
+    <p>Register once, then manage your own records securely.</p>
+
+    <form method="post" class="form-grid">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create a password" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p class="helper-text">Already registered? <a href="{{ url_for('login') }}">Go to login</a>.</p>
+</section>
+{% endblock %}
